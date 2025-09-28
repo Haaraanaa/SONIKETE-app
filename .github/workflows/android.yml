@@ -20,10 +20,11 @@ jobs:
           java-version: '17'
 
       - name: Prepare Gradle Wrapper
-        run: |
-          mkdir -p android/gradle/wrapper
-          curl -o android/gradle/wrapper/gradle-wrapper.jar https://services.gradle.org/distributions/gradle-8.4-bin.zip
-          echo "distributionUrl=https\\://services.gradle.org/distributions/gradle-8.4-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
+  run: |
+    mkdir -p android/gradle/wrapper
+    curl -L -o android/gradle/wrapper/gradle-wrapper.jar https://github.com/AmrDeveloper/GradleWrapper/raw/master/gradle/wrapper/gradle-wrapper.jar
+    echo "distributionUrl=https\\://services.gradle.org/distributions/gradle-8.4-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
+
 
       - name: Build APK
         run: |
