@@ -20,6 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Build APK
+        working-directory: android
         run: ./gradlew assembleDebug
 
       - name: Upload APK
