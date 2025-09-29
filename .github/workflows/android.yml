@@ -1,40 +1,29 @@
 name: Build APK
 
 on:
-  # Ejecuta el flujo de trabajo en cada "push" (envío) a la rama 'main'
   push:
     branches:
       - main
-  
-  # También permite ejecutar manualmente el flujo de trabajo
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code 📦
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up JDK ☕
-        uses: actions/setup-java@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
-          
-      - name: Make gradlew executable 🔨
-        # Le da permisos de ejecución al script de Gradle
-        run: chmod +x android/gradlew
-        
-      - name: Build Debug APK ⚙️
-        # Ejecuta la tarea de compilación dentro de tu carpeta 'android'
-        run: cd android && ./gradlew assembleDebug
 
-      - name: Upload APK artifact ⬆️
-        # Sube el APK para que lo puedas descargar
-        uses: actions/upload-artifact@v4
+      - name: Build APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
         with:
           name: sonikete-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 7
